@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} — {{ SITENAME }}{% endblock title %}
+{% block description %}
+{% if page.summary %}{{ page.summary|striptags }}{% else %}Exercícios interativos de matemática no portal {{ SITENAME }}.{% endif %}
+{% endblock description %}
+
+{% block content %}
+{% set exercise_pages = pages | selectattr("exercise_collection", "defined") | sort(attribute="date", reverse=true) | list %}
+{% set featured_exercise = namespace(item=None) %}
+{% for candidate in exercise_pages %}
+  {% if not featured_exercise.item and candidate.featured %}
+    {% set featured_exercise.item = candidate %}
+  {% endif %}
+{% endfor %}
+{% if not featured_exercise.item and exercise_pages %}
+  {% set featured_exercise.item = exercise_pages[0] %}
+{% endif %}
+
+<section class="page-hero">
+  <div class="section-wrap page-hero-inner fade-up">
+    <p class="page-kicker">{% if page.kicker %}{{ page.kicker }}{% else %}Prática guiada{% endif %}</p>
+    <h1 class="page-title">{{ page.title }}</h1>
+    {% if page.subtitle %}
+    <p class="page-subtitle">{{ page.subtitle }}</p>
+    {% elif page.summary %}
+    <p class="page-subtitle">{{ page.summary|striptags }}</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="page-section">
+  <div class="section-wrap exercises-shell">
+    <div class="content-prose quiz-intro fade-up">
+      {{ page.content }}
+    </div>
+
+    {% if featured_exercise.item %}
+    <a href="{{ SITEURL }}/{{ featured_exercise.item.url }}" class="exercise-feature fade-up">
+      <div class="exercise-feature-body">
+        <p class="post-category">Coleção em destaque</p>
+        <h2 class="exercise-feature-title">{{ featured_exercise.item.title }}</h2>
+        <p class="exercise-feature-text">{{ featured_exercise.item.summary|striptags }}</p>
+        <div class="exercise-badges">
+          <span class="exercise-badge">{{ featured_exercise.item.topic }}</span>
+          <span class="exercise-badge">{{ featured_exercise.item.level }}</span>
+          <span class="exercise-badge">{{ featured_exercise.item.question_count }}</span>
+          <span class="exercise-badge">{{ featured_exercise.item.estimated_time }}</span>
+        </div>
+      </div>
+      <div class="exercise-feature-side">
+        <span class="exercise-feature-label">Abrir lista →</span>
+      </div>
+    </a>
+    {% endif %}
+
+    <div class="section-header fade-up">
+      <div>
+        <p class="section-label">Coleções</p>
+        <h2 class="section-title">Listas automatizadas</h2>
+      </div>
+    </div>
+
+    {% if exercise_pages %}
+    <div class="exercise-grid">
+      {% for exercise in exercise_pages %}
+      <a href="{{ SITEURL }}/{{ exercise.url }}" class="exercise-card fade-up">
+        <div class="exercise-card-top">
+          <p class="post-category">{{ exercise.topic }}</p>
+          <h3 class="exercise-card-title">{{ exercise.title }}</h3>
+          <p class="exercise-card-text">{{ exercise.summary|striptags }}</p>
+        </div>
+        <div class="exercise-badges">
+          <span class="exercise-badge">{{ exercise.level }}</span>
+          <span class="exercise-badge">{{ exercise.question_count }}</span>
+          <span class="exercise-badge">{{ exercise.estimated_time }}</span>
+        </div>
+        <div class="post-meta" style="margin-top: 1rem;">
+          <span>{{ exercise.locale_date }}</span>
+          <span class="post-meta-dot"></span>
+          <span>Atualização pronta por JSON</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state fade-up">
+      Nenhuma coleção de exercícios foi publicada ainda. Adicione páginas com `Template: exercicio` e `Questions_File`.
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock content %}

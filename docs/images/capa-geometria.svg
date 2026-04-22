@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Capa de geometria</title>
+  <desc id="desc">Fundo escuro com linhas curvas e triângulos dourados.</desc>
+  <rect width="1200" height="720" fill="#0c1121"/>
+  <g fill="none" stroke="#c9a84c" stroke-width="2.5" opacity="0.52">
+    <path d="M170 540Q420 150 720 320T1080 210"/>
+    <path d="M160 470Q360 640 600 500T1030 600"/>
+    <polygon points="220,230 420,520 80,520"/>
+    <polygon points="760,180 1020,430 670,520"/>
+  </g>
+  <circle cx="860" cy="290" r="150" fill="rgba(201,168,76,0.05)"/>
+  <g fill="#f2ede4">
+    <text x="120" y="140" font-size="46" font-family="'Playfair Display', serif">Geometria</text>
+    <text x="120" y="198" font-size="24" font-family="'JetBrains Mono', monospace" letter-spacing="6">CURVAS · FORMAS · ESTRUTURA</text>
+  </g>
+  <text x="970" y="580" font-size="120" fill="#c9a84c" font-family="'Playfair Display', serif">△</text>
+</svg>

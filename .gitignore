@@ -1,7 +1,0 @@
-*.code-workspace
-.code-workspace
-dimensaoalfa.github.io.code-workspace
-.vscode/launch.json
-*.imgs/slidecontent/full/
-__pycache__
-todo.md

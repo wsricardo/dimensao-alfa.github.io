@@ -1,0 +1,10 @@
+{% if articles_previous_page or articles_next_page %}
+<div class="pagination fade-up">
+  {% if articles_previous_page %}
+  <a href="{{ SITEURL }}/{{ articles_previous_page.url }}" class="btn-ghost">← Mais recentes</a>
+  {% endif %}
+  {% if articles_next_page %}
+  <a href="{{ SITEURL }}/{{ articles_next_page.url }}" class="btn-ghost">Mais antigas →</a>
+  {% endif %}
+</div>
+{% endif %}

@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+
+{% block title %}{{ SITENAME }} — {{ SITESUBTITLE }}{% endblock title %}
+{% block description %}{{ SITE_DESCRIPTION }}{% endblock description %}
+
+{% block content %}
+{% set featured = namespace(item=None) %}
+{% for candidate in articles %}
+  {% if not featured.item and candidate.featured %}
+    {% set featured.item = candidate %}
+  {% endif %}
+{% endfor %}
+{% if not featured.item and articles %}
+  {% set featured.item = articles[0] %}
+{% endif %}
+{% if featured.item %}
+  {% set recent_articles = articles|rejectattr("slug", "equalto", featured.item.slug)|list %}
+{% else %}
+  {% set recent_articles = articles %}
+{% endif %}
+
+<section class="hero">
+  <span class="float-sym fs-1">∫</span>
+  <span class="float-sym fs-2">∑</span>
+  <span class="float-sym fs-3">π</span>
+
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="hero-eyebrow">{{ HOME_HERO.eyebrow }}</p>
+      <h1 class="hero-title">
+        {{ HOME_HERO.title_before }}<em>{{ HOME_HERO.title_emphasis }}</em><br>{{ HOME_HERO.title_after }}
+      </h1>
+      <p class="hero-sub">{{ HOME_HERO.description }}</p>
+      <div class="hero-actions">
+        <a href="{{ SITEURL }}/{{ HOME_HERO.primary_cta_url }}" class="btn-primary">{{ HOME_HERO.primary_cta_label }}</a>
+        <a href="{{ SITEURL }}/{{ HOME_HERO.secondary_cta_url }}" class="btn-ghost">{{ HOME_HERO.secondary_cta_label }}</a>
+      </div>
+    </div>
+
+    <div class="hero-formula">
+      <div class="formula-card">
+        <p class="formula-label">Fórmula em destaque</p>
+        <div class="formula-body">
+          <div style="margin-bottom: 1rem;">
+            <span class="sym">e</span><sup><span class="sym">iπ</span></sup>
+            <span style="margin: 0 0.3em;">+</span>
+            <span class="sym">1</span>
+            <span style="margin: 0 0.3em;">=</span>
+            <span class="sym">0</span>
+          </div>
+          <div style="font-size: 0.85em; margin-bottom: 1rem;">
+            <span class="frac">
+              <span class="num">d</span>
+              <span class="bar"></span>
+              <span class="den">dx</span>
+            </span>
+            <span class="sym">∫<sub>a</sub><sup>x</sup></span>
+            <span style="margin-left: 0.3em;">f(t) dt</span>
+            <span style="margin: 0 0.3em;">=</span>
+            <span class="sym">f</span>(x)
+          </div>
+          <div style="font-size: 0.8em;">
+            <span class="sym">ζ</span>(s)
+            <span style="margin: 0 0.3em;">=</span>
+            <span class="sym">∑</span>
+            <span style="font-size: 0.75em;">
+              <span class="frac">
+                <span class="num">1</span>
+                <span class="bar"></span>
+                <span class="den">n<sup>s</sup></span>
+              </span>
+            </span>
+          </div>
+        </div>
+        <div class="formula-tags">
+          {% for tag in HOME_HERO.formula_tags %}
+          <span class="formula-tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    {% for topic in HOME_TICKER_TOPICS %}
+    <span class="ticker-item">{{ topic }} <span>→</span></span>
+    {% endfor %}
+    {% for topic in HOME_TICKER_TOPICS %}
+    <span class="ticker-item">{{ topic }} <span>→</span></span>
+    {% endfor %}
+  </div>
+</div>
+
+<section class="categories">
+  <div class="section-wrap">
+    <div class="section-header fade-up">
+      <div>
+        <p class="section-label">Explore por área</p>
+        <h2 class="section-title">Categorias</h2>
+      </div>
+    </div>
+    <div class="cat-grid">
+      {% for category, articles_in_category in categories[:HOME_CATEGORY_LIMIT] %}
+      {% set category_name = category.name if category.name is defined else category %}
+      {% set category_symbol = CATEGORY_SYMBOLS.get(category_name, "∑") %}
+      {% set category_label = CATEGORY_SHORT_LABELS.get(category_name, category_name) %}
+      <a href="{{ SITEURL }}/{{ category.url }}" class="cat-item fade-up">
+        <div class="cat-sym">{{ category_symbol }}</div>
+        <div class="cat-name">{{ category_label }}</div>
+        <div class="cat-count">{{ articles_in_category|count }} artigos</div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="featured">
+  <div class="section-wrap">
+    <div class="section-header fade-up">
+      <div>
+        <p class="section-label">Publicações</p>
+        <h2 class="section-title">Artigos em Destaque</h2>
+      </div>
+      <a href="{{ SITEURL }}/blog/" class="section-link">Ver todos →</a>
+    </div>
+
+    {% if featured.item %}
+    {% set featured_cover = featured.item.cover_image|default(DEFAULT_COVER_IMAGE) %}
+    <a href="{{ SITEURL }}/{{ featured.item.url }}" class="feature-big fade-up">
+      <div class="feature-big-img">
+        <img src="{% if featured_cover.startswith('http') %}{{ featured_cover }}{% else %}{{ SITEURL }}/{{ featured_cover }}{% endif %}" alt="{{ featured.item.title }}" loading="lazy">
+      </div>
+      <div class="feature-big-body">
+        <p class="post-category">{{ featured.item.category }}{% if featured.item.series %} · {{ featured.item.series }}{% endif %}</p>
+        <h3 class="post-title">{{ featured.item.title }}</h3>
+        <p class="post-excerpt">{{ featured.item.summary|striptags }}</p>
+        <div class="post-meta">
+          <span>{{ featured.item.author|default(AUTHOR) }}</span>
+          <span class="post-meta-dot"></span>
+          <span>{{ featured.item.reading_time|default("Leitura guiada") }}</span>
+          <span class="post-meta-dot"></span>
+          <span>{{ featured.item.locale_date }}</span>
+        </div>
+      </div>
+    </a>
+    {% endif %}
+
+    <div class="post-grid">
+      {% for article in recent_articles[:HOME_RECENT_POST_LIMIT] %}
+      {% set cover = article.cover_image|default(DEFAULT_COVER_IMAGE) %}
+      <a href="{{ SITEURL }}/{{ article.url }}" class="post-card fade-up">
+        <div class="post-card-thumb">
+          <img src="{% if cover.startswith('http') %}{{ cover }}{% else %}{{ SITEURL }}/{{ cover }}{% endif %}" alt="{{ article.title }}" loading="lazy">
+        </div>
+        <div class="post-card-body">
+          <p class="post-category">{{ article.category }}</p>
+          <h3 class="post-title">{{ article.title }}</h3>
+          <p class="post-excerpt">{{ article.summary|striptags }}</p>
+          <div class="post-meta" style="margin-top: 1rem;">
+            <span>{{ article.reading_time|default("Leitura guiada") }}</span>
+            <span class="post-meta-dot"></span>
+            <span>{{ article.locale_date }}</span>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<div class="quote-banner">
+  <div class="quote-inner fade-up">
+    <div class="quote-mark">"</div>
+    <p class="quote-text">{{ HOME_QUOTE.text }}</p>
+    <p class="quote-author">— {{ HOME_QUOTE.author }}</p>
+  </div>
+</div>
+
+<section class="tools-section">
+  <div class="section-wrap">
+    <div class="section-header fade-up">
+      <div>
+        <p class="section-label">Ferramentas</p>
+        <h2 class="section-title">Apps & Recursos</h2>
+      </div>
+      <a href="{{ SITEURL }}/apps.html" class="section-link">Ver todos →</a>
+    </div>
+    <div class="tools-grid">
+      {% for tool in HOME_TOOLS %}
+      <a href="{% if tool.url.startswith('http') %}{{ tool.url }}{% else %}{{ SITEURL }}/{{ tool.url }}{% endif %}" class="tool-card fade-up">
+        <div class="tool-icon">{{ tool.icon }}</div>
+        <div class="tool-name">{{ tool.name }}</div>
+        <div class="tool-desc">{{ tool.description }}</div>
+        <div class="tool-arrow">Acessar →</div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="newsletter">
+  <div class="newsletter-inner">
+    <p class="section-label">Fique por dentro</p>
+    <h2 class="section-title fade-up">{{ NEWSLETTER.title }}</h2>
+    <p class="fade-up">{{ NEWSLETTER.description }}</p>
+    {% if NEWSLETTER.action %}
+    <form class="newsletter-form fade-up" action="{{ NEWSLETTER.action }}" method="post">
+      <input type="email" name="email" placeholder="{{ NEWSLETTER.placeholder }}" required>
+      <button type="submit">{{ NEWSLETTER.button_label }}</button>
+    </form>
+    {% else %}
+    <div class="newsletter-form fade-up">
+      <input type="email" placeholder="{{ NEWSLETTER.placeholder }}" disabled>
+      <button type="button" disabled>{{ NEWSLETTER.button_label }}</button>
+    </div>
+    <p class="newsletter-note fade-up">{{ NEWSLETTER.note }}</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock content %}

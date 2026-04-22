@@ -1,0 +1,35 @@
+{
+  "title": "Lista 01 — Limites Notáveis",
+  "questions": [
+    {
+      "question": "Se lim x→0 sen(x)/x = 1, qual leitura conceitual é mais adequada?",
+      "options": [
+        "Seno e identidade coincidem para todo x.",
+        "Perto de zero, a função seno se comporta localmente como x.",
+        "Toda função trigonométrica admite o mesmo limite em qualquer ponto."
+      ],
+      "correct": 1,
+      "explanation": "O limite descreve comportamento local. Ele não diz que as funções são iguais, mas que sua razão tende a 1 quando x se aproxima de zero."
+    },
+    {
+      "question": "Ao encontrar uma indeterminação 0/0 em uma questão de limite, o passo mais produtivo costuma ser:",
+      "options": [
+        "Concluir que o limite não existe.",
+        "Procurar uma reescrita algébrica compatível com a estrutura do problema.",
+        "Substituir o valor por 1 para remover a indeterminação."
+      ],
+      "correct": 1,
+      "explanation": "A indeterminação normalmente sinaliza que a expressão precisa ser reorganizada antes da avaliação final."
+    },
+    {
+      "question": "Por que limites notáveis são úteis em cálculo introdutório?",
+      "options": [
+        "Porque eliminam a necessidade de demonstração.",
+        "Porque permitem transformar expressões familiares em formas mais legíveis e comparáveis.",
+        "Porque substituem qualquer manipulação algébrica."
+      ],
+      "correct": 1,
+      "explanation": "Eles funcionam como chaves de reconhecimento. A técnica continua importante, mas a estrutura correta fica muito mais visível."
+    }
+  ]
+}

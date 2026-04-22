@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} — {{ SITENAME }}{% endblock title %}
+{% block description %}
+{% if page.summary %}{{ page.summary|striptags }}{% else %}Exercícios interativos de matemática no portal {{ SITENAME }}.{% endif %}
+{% endblock description %}
+
+{% block content %}
+{% if page.questions_file and page.questions_file.startswith("http") %}
+  {% set quiz_source = page.questions_file %}
+{% elif page.questions_file %}
+  {% set quiz_source = SITEURL ~ "/" ~ page.questions_file %}
+{% else %}
+  {% set quiz_source = "" %}
+{% endif %}
+
+<section class="page-hero">
+  <div class="section-wrap page-hero-inner fade-up">
+    <p class="page-kicker">{% if page.kicker %}{{ page.kicker }}{% else %}Prática guiada{% endif %}</p>
+    <h1 class="page-title">{{ page.title }}</h1>
+    {% if page.subtitle %}
+    <p class="page-subtitle">{{ page.subtitle }}</p>
+    {% elif page.summary %}
+    <p class="page-subtitle">{{ page.summary|striptags }}</p>
+    {% endif %}
+    <div class="exercise-badges page-badges">
+      {% if page.topic %}<span class="exercise-badge">{{ page.topic }}</span>{% endif %}
+      {% if page.level %}<span class="exercise-badge">{{ page.level }}</span>{% endif %}
+      {% if page.question_count %}<span class="exercise-badge">{{ page.question_count }}</span>{% endif %}
+      {% if page.estimated_time %}<span class="exercise-badge">{{ page.estimated_time }}</span>{% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="page-section">
+  <div class="content-shell quiz-shell">
+    <div class="content-prose quiz-intro fade-up">
+      {{ page.content }}
+    </div>
+
+    <div class="quiz-runtime fade-up" data-quiz-root{% if quiz_source %} data-quiz-source="{{ quiz_source }}"{% endif %}>
+      <div class="quiz-state" data-quiz-state>
+        {% if quiz_source %}
+        Carregando questões...
+        {% else %}
+        Nenhum arquivo de questões foi configurado para esta página.
+        {% endif %}
+      </div>
+      <div class="quiz-list" data-quiz-list hidden></div>
+      <div class="quiz-actions" data-quiz-actions hidden>
+        <button data-quiz-submit type="button" class="btn-primary">Ver resultado</button>
+      </div>
+      <div class="quiz-result" data-quiz-result aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
+
+{% block scripts %}
+<script src="{{ SITEURL }}/theme/js/exercicios.js" defer></script>
+{% endblock scripts %}

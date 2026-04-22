@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}{{ category }} — {{ SITENAME }}{% endblock title %}
+{% block description %}Artigos da categoria {{ category }} no portal {{ SITENAME }}.{% endblock description %}
+
+{% block content %}
+{% if articles_page %}
+  {% set article_list = articles_page.object_list %}
+{% else %}
+  {% set article_list = articles %}
+{% endif %}
+
+<section class="page-hero">
+  <div class="section-wrap page-hero-inner fade-up">
+    <p class="page-kicker">Categoria</p>
+    <h1 class="page-title">{{ category }}</h1>
+    <p class="page-subtitle">
+      Leituras selecionadas para aprofundar o estudo desta área.
+    </p>
+  </div>
+</section>
+
+<section class="archive-section">
+  <div class="section-wrap">
+    <div class="archive-grid">
+      {% for article in article_list %}
+      {% set cover = article.cover_image|default(DEFAULT_COVER_IMAGE) %}
+      <a href="{{ SITEURL }}/{{ article.url }}" class="archive-card fade-up">
+        <div class="archive-card-media">
+          <img src="{% if cover.startswith('http') %}{{ cover }}{% else %}{{ SITEURL }}/{{ cover }}{% endif %}" alt="{{ article.title }}" loading="lazy">
+        </div>
+        <div class="archive-card-body">
+          <p class="post-category">{{ article.category }}</p>
+          <h2 class="archive-card-title">{{ article.title }}</h2>
+          <p class="archive-card-excerpt">{{ article.summary|striptags }}</p>
+          <div class="post-meta">
+            <span>{{ article.reading_time|default("Leitura guiada") }}</span>
+            <span class="post-meta-dot"></span>
+            <span>{{ article.locale_date }}</span>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% include "partials/pagination.html" %}
+  </div>
+</section>
+{% endblock content %}

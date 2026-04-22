@@ -1,0 +1,35 @@
+{
+  "title": "Lista 01 — Álgebra Linear e Leitura Geométrica",
+  "questions": [
+    {
+      "question": "Em uma matriz 2x2, o que as colunas representam geometricamente?",
+      "options": [
+        "Os autovalores da transformação.",
+        "As imagens dos vetores da base canônica pela transformação.",
+        "Os únicos vetores que permanecem fixos."
+      ],
+      "correct": 1,
+      "explanation": "Cada coluna mostra para onde vai um vetor da base canônica. Essa leitura torna a matriz muito mais concreta."
+    },
+    {
+      "question": "Uma transformação linear preserva obrigatoriamente:",
+      "options": [
+        "A origem e as combinações lineares.",
+        "O comprimento de todos os vetores.",
+        "Os ângulos entre quaisquer direções."
+      ],
+      "correct": 0,
+      "explanation": "Transformações lineares preservam estrutura linear, não necessariamente comprimentos ou ângulos."
+    },
+    {
+      "question": "Pensar geometricamente em uma matriz ajuda porque:",
+      "options": [
+        "Substitui completamente as contas formais.",
+        "Permite antecipar o efeito da transformação antes da verificação algébrica.",
+        "Evita a necessidade de escolher uma base."
+      ],
+      "correct": 1,
+      "explanation": "A intuição geométrica prepara a formalização e ajuda a conferir se o resultado calculado faz sentido."
+    }
+  ]
+}

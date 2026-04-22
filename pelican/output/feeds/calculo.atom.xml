@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Dimensão Alfa - Cálculo</title><link href="/" rel="alternate"/><link href="/feeds/calculo.atom.xml" rel="self"/><id>/</id><updated>2026-04-10T10:00:00-03:00</updated><subtitle>Portal editorial de matemática, linguagem e investigação</subtitle><entry><title>Questão de Limite da Prova UFPE — Resolução Passo a Passo</title><link href="/blog/questao-de-limite-ufpe.html" rel="alternate"/><published>2026-04-10T10:00:00-03:00</published><updated>2026-04-10T10:00:00-03:00</updated><author><name>Dimensão Alfa</name></author><id>tag:None,2026-04-10:/blog/questao-de-limite-ufpe.html</id><summary type="html">&lt;p&gt;Analisamos uma questão clássica de limite da UFPE, explorando as manipulações algébricas e os limites notáveis que tornam a resolução mais elegante.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Resolver uma boa questão de limite é quase sempre um exercício de leitura. Antes da técnica, vem a percepção da forma algébrica do problema e do tipo de comportamento que a expressão está sugerindo.&lt;/p&gt;
+&lt;h2 id="o-primeiro-olhar"&gt;O primeiro olhar&lt;/h2&gt;
+&lt;p&gt;Quando uma substituição direta produz uma indeterminação, a pergunta correta não é apenas "qual técnica usar?", mas "que estrutura está escondida aqui?". Em muitos exercícios de vestibular, fatoração, racionalização ou uma identidade trigonométrica simples já recolocam o problema em uma forma tratável.&lt;/p&gt;
+&lt;h2 id="o-papel-dos-limites-notaveis"&gt;O papel dos limites notáveis&lt;/h2&gt;
+&lt;p&gt;Os limites notáveis funcionam como pequenas chaves de acesso. Eles não resolvem tudo sozinhos, mas transformam expressões aparentemente opacas em algo familiar o bastante para avançar com segurança.&lt;/p&gt;
+&lt;p&gt;Um roteiro produtivo é:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Testar a substituição direta.&lt;/li&gt;
+&lt;li&gt;Identificar a indeterminação.&lt;/li&gt;
+&lt;li&gt;Procurar uma reescrita compatível com um limite conhecido.&lt;/li&gt;
+&lt;li&gt;Só então simplificar a expressão final.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="por-que-esse-tipo-de-questao-importa"&gt;Por que esse tipo de questão importa&lt;/h2&gt;
+&lt;p&gt;Mais do que chegar a um número, a resolução ensina economia de raciocínio. Uma boa solução em cálculo introdutório costuma ser curta porque ela percebe a estrutura correta cedo o bastante.&lt;/p&gt;</content><category term="Cálculo"/><category term="limites"/><category term="vestibular"/><category term="cálculo"/></entry></feed>

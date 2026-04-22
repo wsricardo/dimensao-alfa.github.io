@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article.title }} — {{ SITENAME }}{% endblock title %}
+{% block description %}{{ article.summary|striptags|default(SITE_DESCRIPTION) }}{% endblock description %}
+
+{% block content %}
+{% set cover = article.cover_image|default(DEFAULT_COVER_IMAGE) %}
+
+<section class="article-hero">
+  <div class="section-wrap article-hero-inner">
+    <div class="article-copy fade-up">
+      <p class="page-kicker">{{ article.category }}</p>
+      <h1 class="article-title">{{ article.title }}</h1>
+      {% if article.summary %}
+      <p class="article-summary">{{ article.summary|striptags }}</p>
+      {% endif %}
+      <div class="post-meta article-meta">
+        <span>{{ article.author|default(AUTHOR) }}</span>
+        <span class="post-meta-dot"></span>
+        <span>{{ article.reading_time|default("Leitura guiada") }}</span>
+        <span class="post-meta-dot"></span>
+        <span>{{ article.locale_date }}</span>
+      </div>
+      {% if article.tags %}
+      <div class="article-taxonomy">
+        {% for tag in article.tags %}
+        <span class="formula-tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    <div class="article-visual fade-up">
+      <div class="article-cover">
+        <img src="{% if cover.startswith('http') %}{{ cover }}{% else %}{{ SITEURL }}/{{ cover }}{% endif %}" alt="{{ article.title }}" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<article class="content-shell">
+  <div class="content-prose">
+    {{ article.content }}
+  </div>
+</article>
+{% endblock content %}

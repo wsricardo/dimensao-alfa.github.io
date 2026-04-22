@@ -1,0 +1,35 @@
+{
+  "title": "Lista 01 — Probabilidade Condicional",
+  "questions": [
+    {
+      "question": "Por que o denominador muda em probabilidade condicional?",
+      "options": [
+        "Porque a condição redefine o conjunto de casos ainda possíveis.",
+        "Porque a probabilidade original deixa de existir.",
+        "Porque o numerador precisa sempre ser normalizado por 2."
+      ],
+      "correct": 0,
+      "explanation": "A nova informação restringe o universo relevante. O denominador passa a contar apenas os cenários compatíveis com essa condição."
+    },
+    {
+      "question": "A principal fonte de erro em exercícios de probabilidade condicional costuma ser:",
+      "options": [
+        "Usar frações em vez de porcentagens.",
+        "Continuar raciocinando com o espaço amostral antigo após receber nova informação.",
+        "Aplicar uma fórmula antes de desenhar um gráfico."
+      ],
+      "correct": 1,
+      "explanation": "Quando a condição muda o universo observável, insistir no espaço amostral antigo distorce toda a contagem."
+    },
+    {
+      "question": "Em termos conceituais, P(A|B) pode ser lida como:",
+      "options": [
+        "A probabilidade de A e B nunca ocorrerem juntos.",
+        "A probabilidade de A dentro do universo em que B já aconteceu.",
+        "A soma das probabilidades de A e B."
+      ],
+      "correct": 1,
+      "explanation": "A barra vertical em P(A|B) indica exatamente essa mudança de perspectiva: agora observamos apenas o mundo em que B ocorreu."
+    }
+  ]
+}

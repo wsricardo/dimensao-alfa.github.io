@@ -1,0 +1,33 @@
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-brand" style="margin-bottom: 0.3rem;">
+        <span class="brand-symbol">α</span>
+        <span class="brand-text">{{ SITENAME }}</span>
+      </div>
+      <p>{{ FOOTER_DESCRIPTION }}</p>
+    </div>
+    {% for column in FOOTER_COLUMNS %}
+    <div class="footer-col">
+      <h4>{{ column.title }}</h4>
+      <ul>
+        {% for link in column.links %}
+        <li>
+          <a href="{% if link.url.startswith('http') %}{{ link.url }}{% else %}{{ SITEURL }}/{{ link.url }}{% endif %}"{% if link.url.startswith('http') %} target="_blank" rel="noopener"{% endif %}>
+            {{ link.label }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="footer-bottom">
+    <p>© {{ COPYRIGHT_YEAR }} {{ SITENAME }} — Todos os direitos reservados.</p>
+    <div class="footer-social">
+      {% for link in FOOTER_SOCIAL_LINKS %}
+      <a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>
+      {% endfor %}
+    </div>
+  </div>
+</footer>

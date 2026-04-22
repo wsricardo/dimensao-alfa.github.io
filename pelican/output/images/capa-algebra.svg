@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Capa de álgebra</title>
+  <desc id="desc">Composição escura com grade geométrica e notação matricial.</desc>
+  <rect width="1200" height="720" fill="#101628"/>
+  <g stroke="#c9a84c" stroke-width="2" opacity="0.4" fill="none">
+    <rect x="170" y="170" width="260" height="260"/>
+    <rect x="260" y="260" width="260" height="260"/>
+    <rect x="350" y="120" width="260" height="260"/>
+    <rect x="640" y="170" width="340" height="340"/>
+    <path d="M170 300H430M300 170V430"/>
+    <path d="M640 340H980M810 170V510"/>
+  </g>
+  <g fill="#c9a84c" opacity="0.9">
+    <text x="760" y="310" font-size="92" font-family="'JetBrains Mono', monospace">A</text>
+    <text x="845" y="310" font-size="92" font-family="'JetBrains Mono', monospace">x</text>
+    <text x="902" y="310" font-size="92" font-family="'JetBrains Mono', monospace">=</text>
+    <text x="760" y="415" font-size="92" font-family="'JetBrains Mono', monospace">b</text>
+  </g>
+  <g fill="#f2ede4">
+    <text x="120" y="560" font-size="46" font-family="'Playfair Display', serif">Álgebra</text>
+    <text x="120" y="618" font-size="24" font-family="'JetBrains Mono', monospace" letter-spacing="6">MATRIZES · ESPAÇOS · TRANSFORMAÇÕES</text>
+  </g>
+</svg>

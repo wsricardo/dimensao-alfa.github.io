@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dimensão Alfa — Portal de Matemática</title>
-  <meta name="description" content="Portal de matemática com artigos, vídeos, ferramentas e biblioteca. Arte, tecnologia, ciência e informação." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <style>
-    /* ─── RESET & BASE ─────────────────────────────────────────── */
+/* ─── RESET & BASE ─────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -903,389 +892,466 @@
       padding: 0 2.5rem;
     }
     .ticker-item span { color: var(--gold); }
-    @keyframes ticker {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-  </style>
-</head>
-<body>
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 
-  <!-- ─── NAVIGATION ──────────────────────────────────────── -->
-  <nav id="nav">
-    <a href="index.html" class="nav-brand">
-      <span class="brand-symbol">α</span>
-      <span class="brand-text">Dimensão Alfa</span>
-    </a>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="blog/">Blog</a></li>
-      <li><a href="bib.html">Biblioteca</a></li>
-      <li><a href="tools.html">Apps</a></li>
-      <li><a href="shop.html" class="nav-cta">Shop</a></li>
-    </ul>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
+/* ─── PELICAN LAYOUTS ─────────────────────────────────────────── */
+.site-main {
+  position: relative;
+  z-index: 1;
+}
 
-  <!-- ─── HERO ─────────────────────────────────────────────── -->
-  <section class="hero">
-    <span class="float-sym fs-1">∫</span>
-    <span class="float-sym fs-2">∑</span>
-    <span class="float-sym fs-3">π</span>
+.page-hero,
+.article-hero {
+  position: relative;
+  overflow: hidden;
+}
 
-    <div class="hero-inner">
-      <div class="hero-text">
-        <p class="hero-eyebrow">Portal de Matemática</p>
-        <h1 class="hero-title">
-          Onde a <em>matemática</em><br>encontra a linguagem
-        </h1>
-        <p class="hero-sub">
-          Artigos, vídeos, ferramentas e biblioteca para quem quer entender
-          a matemática além das fórmulas — da intuição à demonstração rigorosa.
-        </p>
-        <div class="hero-actions">
-          <a href="blog/" class="btn-primary">Explorar Blog</a>
-          <a href="bib.html" class="btn-ghost">Ver Biblioteca</a>
-        </div>
-      </div>
+.page-hero {
+  padding: calc(var(--nav-h) + 4rem) 0 2.5rem;
+}
 
-      <div class="hero-formula">
-        <div class="formula-card">
-          <p class="formula-label">Fórmula em destaque</p>
-          <div class="formula-body">
-            <div style="margin-bottom:1rem">
-              <span class="sym">e</span><sup><span class="sym">iπ</span></sup>
-              <span style="margin:0 0.3em">+</span>
-              <span class="sym">1</span>
-              <span style="margin:0 0.3em">=</span>
-              <span class="sym">0</span>
-            </div>
-            <div style="font-size:0.85em; margin-bottom:1rem">
-              <span class="frac">
-                <span class="num">d</span>
-                <span class="bar"></span>
-                <span class="den">dx</span>
-              </span>
-              <span style="margin:0 0.2em"></span>
-              <span class="sym">∫<sub>a</sub><sup>x</sup></span>
-              <span style="margin-left:0.3em">f(t) dt</span>
-              <span style="margin:0 0.3em">=</span>
-              <span class="sym">f</span>(x)
-            </div>
-            <div style="font-size:0.8em">
-              <span class="sym">ζ</span>(s)
-              <span style="margin:0 0.3em">=</span>
-              <span class="sym">∑</span>
-              <span style="font-size:0.75em">
-                <span class="frac">
-                  <span class="num">1</span>
-                  <span class="bar"></span>
-                  <span class="den">n<sup>s</sup></span>
-                </span>
-              </span>
-            </div>
-          </div>
-          <div class="formula-tags">
-            <span class="formula-tag">Análise</span>
-            <span class="formula-tag">Números Complexos</span>
-            <span class="formula-tag">Cálculo</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+.article-hero {
+  padding: calc(var(--nav-h) + 4rem) 0 3rem;
+}
 
-  <!-- ─── TICKER ───────────────────────────────────────────── -->
-  <div class="ticker-wrap">
-    <div class="ticker-track">
-      <span class="ticker-item">Cálculo Diferencial <span>→</span></span>
-      <span class="ticker-item">Álgebra Linear <span>→</span></span>
-      <span class="ticker-item">Teoria dos Números <span>→</span></span>
-      <span class="ticker-item">Geometria Diferencial <span>→</span></span>
-      <span class="ticker-item">Análise Real <span>→</span></span>
-      <span class="ticker-item">Topologia <span>→</span></span>
-      <span class="ticker-item">Equações Diferenciais <span>→</span></span>
-      <span class="ticker-item">Probabilidade <span>→</span></span>
-      <!-- duplicate for seamless loop -->
-      <span class="ticker-item">Cálculo Diferencial <span>→</span></span>
-      <span class="ticker-item">Álgebra Linear <span>→</span></span>
-      <span class="ticker-item">Teoria dos Números <span>→</span></span>
-      <span class="ticker-item">Geometria Diferencial <span>→</span></span>
-      <span class="ticker-item">Análise Real <span>→</span></span>
-      <span class="ticker-item">Topologia <span>→</span></span>
-      <span class="ticker-item">Equações Diferenciais <span>→</span></span>
-      <span class="ticker-item">Probabilidade <span>→</span></span>
-    </div>
-  </div>
+.page-hero::after,
+.article-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 28%, rgba(201,168,76,0.09), transparent 32%),
+    radial-gradient(circle at 80% 20%, rgba(201,168,76,0.06), transparent 26%);
+  pointer-events: none;
+}
 
-  <!-- ─── CATEGORIES ───────────────────────────────────────── -->
-  <section class="categories">
-    <div class="section-wrap">
-      <div class="section-header fade-up">
-        <div>
-          <p class="section-label">Explore por área</p>
-          <h2 class="section-title">Categorias</h2>
-        </div>
-      </div>
-      <div class="cat-grid">
-        <a href="blog/" class="cat-item fade-up">
-          <div class="cat-sym">∫</div>
-          <div class="cat-name">Cálculo</div>
-          <div class="cat-count">12 artigos</div>
-        </a>
-        <a href="blog/" class="cat-item fade-up">
-          <div class="cat-sym">A</div>
-          <div class="cat-name">Álgebra</div>
-          <div class="cat-count">8 artigos</div>
-        </a>
-        <a href="blog/" class="cat-item fade-up">
-          <div class="cat-sym">△</div>
-          <div class="cat-name">Geometria</div>
-          <div class="cat-count">6 artigos</div>
-        </a>
-        <a href="blog/" class="cat-item fade-up">
-          <div class="cat-sym">ℝ</div>
-          <div class="cat-name">Análise</div>
-          <div class="cat-count">9 artigos</div>
-        </a>
-        <a href="blog/" class="cat-item fade-up">
-          <div class="cat-sym">ℙ</div>
-          <div class="cat-name">Probabilidade</div>
-          <div class="cat-count">5 artigos</div>
-        </a>
-        <a href="blog/" class="cat-item fade-up">
-          <div class="cat-sym">ℤ</div>
-          <div class="cat-name">T. Números</div>
-          <div class="cat-count">4 artigos</div>
-        </a>
-      </div>
-    </div>
-  </section>
+.page-hero-inner {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 5vw, 2.5rem);
+  position: relative;
+  z-index: 1;
+}
 
-  <!-- ─── FEATURED POSTS ───────────────────────────────────── -->
-  <section class="featured">
-    <div class="section-wrap">
-      <div class="section-header fade-up">
-        <div>
-          <p class="section-label">Publicações</p>
-          <h2 class="section-title">Artigos em Destaque</h2>
-        </div>
-        <a href="blog/" class="section-link">Ver todos →</a>
-      </div>
+.page-kicker {
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.9rem;
+}
 
-      <!-- Big feature -->
-      <a href="blog/" class="feature-big fade-up">
-        <div class="feature-big-img">
-          <img
-            src="https://dimensao-alfa.github.io/imgs/books-near-notebook-coffee.jpg"
-            alt="Questão de Limite — UFPE"
-            loading="lazy"
-          />
-        </div>
-        <div class="feature-big-body">
-          <p class="post-category">Cálculo · Questão Resolvida</p>
-          <h3 class="post-title">Questão de Limite da Prova UFPE — Resolução Passo a Passo</h3>
-          <p class="post-excerpt">
-            Analisamos uma questão clássica de limite da prova da UFPE, explorando
-            as estratégias algébricas e os limites notáveis que tornam a resolução
-            mais elegante. Ideal para revisão de vestibular e introdução ao Cálculo.
-          </p>
-          <div class="post-meta">
-            <span>Dimensão Alfa</span>
-            <span class="post-meta-dot"></span>
-            <span>8 min de leitura</span>
-            <span class="post-meta-dot"></span>
-            <span>Cálculo I</span>
-          </div>
-        </div>
-      </a>
+.page-title,
+.article-title {
+  font-family: var(--ff-display);
+  line-height: 1.08;
+  color: var(--cream);
+  letter-spacing: -0.02em;
+}
 
-      <!-- Post grid -->
-      <div class="post-grid">
-        <a href="blog/" class="post-card fade-up">
-          <div class="post-card-thumb">
-            <img src="https://dimensao-alfa.github.io/imgs/books-near-notebook-coffee.jpg" alt="post" loading="lazy" />
-          </div>
-          <div class="post-card-body">
-            <p class="post-category">Álgebra Linear</p>
-            <h3 class="post-title">Transformações Lineares: Intuição Geométrica</h3>
-            <p class="post-excerpt">Como visualizar transformações lineares como rotações, reflexões e projeções no plano.</p>
-            <div class="post-meta" style="margin-top:1rem">
-              <span>6 min</span>
-              <span class="post-meta-dot"></span>
-              <span>Álgebra</span>
-            </div>
-          </div>
-        </a>
-        <a href="blog/" class="post-card fade-up">
-          <div class="post-card-thumb">
-            <img src="https://dimensao-alfa.github.io/imgs/books-near-notebook-coffee.jpg" alt="post" loading="lazy" />
-          </div>
-          <div class="post-card-body">
-            <p class="post-category">Teoria dos Números</p>
-            <h3 class="post-title">A Hipótese de Riemann: Uma Introdução Acessível</h3>
-            <p class="post-excerpt">Por que um problema sobre zeros de uma função complexa importa tanto para a distribuição dos primos?</p>
-            <div class="post-meta" style="margin-top:1rem">
-              <span>12 min</span>
-              <span class="post-meta-dot"></span>
-              <span>Avançado</span>
-            </div>
-          </div>
-        </a>
-        <a href="blog/" class="post-card fade-up">
-          <div class="post-card-thumb">
-            <img src="https://dimensao-alfa.github.io/imgs/books-near-notebook-coffee.jpg" alt="post" loading="lazy" />
-          </div>
-          <div class="post-card-body">
-            <p class="post-category">Análise Real</p>
-            <h3 class="post-title">Completude dos Reais e a Construção de Dedekind</h3>
-            <p class="post-excerpt">O que torna os números reais "completos" e como isso se diferencia dos racionais.</p>
-            <div class="post-meta" style="margin-top:1rem">
-              <span>10 min</span>
-              <span class="post-meta-dot"></span>
-              <span>Fundamentos</span>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
+.page-title {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  margin-bottom: 1rem;
+}
 
-  <!-- ─── QUOTE ─────────────────────────────────────────────── -->
-  <div class="quote-banner">
-    <div class="quote-inner fade-up">
-      <div class="quote-mark">"</div>
-      <p class="quote-text">
-        A matemática é a linguagem na qual Deus escreveu o universo.
-      </p>
-      <p class="quote-author">— Galileu Galilei</p>
-    </div>
-  </div>
+.article-title {
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  margin-bottom: 1rem;
+}
 
-  <!-- ─── TOOLS ─────────────────────────────────────────────── -->
-  <section class="tools-section">
-    <div class="section-wrap">
-      <div class="section-header fade-up">
-        <div>
-          <p class="section-label">Ferramentas</p>
-          <h2 class="section-title">Apps & Recursos</h2>
-        </div>
-        <a href="tools.html" class="section-link">Ver todos →</a>
-      </div>
-      <div class="tools-grid">
-        <a href="tools.html" class="tool-card fade-up">
-          <div class="tool-icon">∂</div>
-          <div class="tool-name">Calculadora de Limites</div>
-          <div class="tool-desc">Resolva limites passo a passo com visualização gráfica interativa.</div>
-          <div class="tool-arrow">Acessar →</div>
-        </a>
-        <a href="tools.html" class="tool-card fade-up">
-          <div class="tool-icon">⊗</div>
-          <div class="tool-name">Multiplicação de Matrizes</div>
-          <div class="tool-desc">Calcule produtos matriciais e visualize o efeito geométrico da transformação.</div>
-          <div class="tool-arrow">Acessar →</div>
-        </a>
-        <a href="tools.html" class="tool-card fade-up">
-          <div class="tool-icon">𝔽</div>
-          <div class="tool-name">Gerador de Questões</div>
-          <div class="tool-desc">Pratique com questões geradas dinamicamente por nível de dificuldade.</div>
-          <div class="tool-arrow">Acessar →</div>
-        </a>
-        <a href="bib.html" class="tool-card fade-up">
-          <div class="tool-icon">📚</div>
-          <div class="tool-name">Biblioteca</div>
-          <div class="tool-desc">Referências, livros recomendados e materiais organizados por área.</div>
-          <div class="tool-arrow">Acessar →</div>
-        </a>
-      </div>
-    </div>
-  </section>
+.page-subtitle,
+.article-summary {
+  color: var(--dim);
+  font-size: 1.02rem;
+  line-height: 1.75;
+  max-width: 62ch;
+}
 
-  <!-- ─── NEWSLETTER ───────────────────────────────────────── -->
-  <section class="newsletter">
-    <div class="newsletter-inner">
-      <p class="section-label">Fique por dentro</p>
-      <h2 class="section-title fade-up">Novos artigos na sua caixa de entrada</h2>
-      <p class="fade-up">Receba os melhores conteúdos de matemática, ferramentas e novidades do portal.</p>
-      <div class="newsletter-form fade-up">
-        <input type="email" placeholder="seu@email.com" />
-        <button type="button">Inscrever</button>
-      </div>
-    </div>
-  </section>
+.page-section,
+.archive-section {
+  padding: 0 0 5rem;
+}
 
-  <!-- ─── FOOTER ───────────────────────────────────────────── -->
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="nav-brand" style="margin-bottom:0.3rem">
-          <span class="brand-symbol">α</span>
-          <span class="brand-text">Dimensão Alfa</span>
-        </div>
-        <p>Arte, tecnologia, ciência e informação. Trazendo conhecimento em doses de esperança.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Conteúdo</h4>
-        <ul>
-          <li><a href="blog/">Blog</a></li>
-          <li><a href="bib.html">Biblioteca</a></li>
-          <li><a href="tools.html">Apps</a></li>
-          <li><a href="projs.html">Projetos</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>YouTube</h4>
-        <ul>
-          <li><a href="https://www.youtube.com/@dimensaoalfa" target="_blank" rel="noopener">Dimensão Alfa</a></li>
-          <li><a href="https://www.youtube.com/@DimensaoAlfaTV" target="_blank" rel="noopener">Dimensão Alfa TV</a></li>
-          <li><a href="https://www.youtube.com/@wsricardo23" target="_blank" rel="noopener">WSRicardo</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Links</h4>
-        <ul>
-          <li><a href="https://wsricardo.blogspot.com" target="_blank" rel="noopener">Blog WSRicardo</a></li>
-          <li><a href="https://www.dimensaoalfa.com.br/blog" target="_blank" rel="noopener">Blog Principal</a></li>
-          <li><a href="shop.html">Shop</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2025 Dimensão Alfa — Todos os direitos reservados.</p>
-      <div class="footer-social">
-        <a href="https://www.youtube.com/@dimensaoalfa" target="_blank" rel="noopener">YouTube</a>
-        <a href="https://www.dimensaoalfa.com.br/blog" target="_blank" rel="noopener">Blog</a>
-        <a href="https://t.me/" target="_blank" rel="noopener">Telegram</a>
-      </div>
-    </div>
-  </footer>
+.archive-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+}
 
-  <!-- ─── SCRIPTS ──────────────────────────────────────────── -->
-  <script>
-    // Mobile nav toggle
-    const toggle = document.getElementById('nav-toggle');
-    const links  = document.getElementById('nav-links');
-    toggle.addEventListener('click', () => {
-      toggle.classList.toggle('open');
-      links.classList.toggle('open');
-    });
+.archive-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--navy-2);
+  border: 1px solid rgba(201,168,76,0.12);
+  border-radius: var(--radius);
+  transition: border-color var(--trans), transform var(--trans);
+}
 
-    // Scroll observer for fade-up animations
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-      { threshold: 0.12 }
-    );
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+.archive-card:hover {
+  border-color: rgba(201,168,76,0.35);
+  transform: translateY(-3px);
+}
 
-    // Nav background on scroll
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.style.background = window.scrollY > 40
-        ? 'rgba(11,13,26,0.97)'
-        : 'rgba(11,13,26,0.88)';
-    });
-  </script>
-</body>
-</html>
+.archive-card-media {
+  position: relative;
+  padding-top: 56%;
+  overflow: hidden;
+}
+
+.archive-card-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.archive-card:hover .archive-card-media img {
+  transform: scale(1.04);
+}
+
+.archive-card-body {
+  padding: 1.4rem 1.2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  flex: 1;
+}
+
+.archive-card-title {
+  font-family: var(--ff-display);
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--cream);
+}
+
+.archive-card-excerpt {
+  color: var(--dim);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  flex: 1;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.article-hero-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 5vw, 2.5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+  gap: 2.5rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.article-copy {
+  max-width: 680px;
+}
+
+.article-meta {
+  margin-top: 1.5rem;
+}
+
+.article-taxonomy {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.4rem;
+}
+
+.article-cover {
+  background: rgba(17,21,42,0.92);
+  border: 1px solid rgba(201,168,76,0.18);
+  border-radius: var(--radius);
+  padding: 1rem;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.24);
+}
+
+.article-cover img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.content-shell {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 5vw, 2.5rem);
+}
+
+.content-prose {
+  background: var(--navy-2);
+  border: 1px solid rgba(201,168,76,0.12);
+  border-radius: var(--radius);
+  padding: clamp(1.4rem, 4vw, 3rem);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.16);
+}
+
+.content-prose > * + * {
+  margin-top: 1.15rem;
+}
+
+.content-prose h2,
+.content-prose h3,
+.content-prose h4 {
+  font-family: var(--ff-display);
+  line-height: 1.2;
+  color: var(--cream);
+}
+
+.content-prose h2 {
+  font-size: clamp(1.5rem, 3vw, 2.15rem);
+  margin-top: 2.4rem;
+}
+
+.content-prose h3 {
+  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+  margin-top: 1.9rem;
+}
+
+.content-prose p,
+.content-prose li {
+  color: var(--cream-2);
+}
+
+.content-prose a {
+  color: var(--gold-lt);
+  text-decoration: underline;
+  text-decoration-color: rgba(201,168,76,0.5);
+  text-underline-offset: 0.15em;
+}
+
+.content-prose strong {
+  color: var(--cream);
+}
+
+.content-prose ul,
+.content-prose ol {
+  padding-left: 1.2rem;
+}
+
+.content-prose li + li {
+  margin-top: 0.45rem;
+}
+
+.content-prose blockquote {
+  border-left: 2px solid rgba(201,168,76,0.75);
+  padding-left: 1rem;
+  color: var(--dim);
+  font-style: italic;
+}
+
+.content-prose hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.32), transparent);
+}
+
+.content-prose code,
+.content-prose pre code {
+  font-family: var(--ff-mono);
+  font-size: 0.9em;
+}
+
+.content-prose code {
+  background: rgba(11,13,26,0.65);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 4px;
+  padding: 0.12rem 0.35rem;
+}
+
+.content-prose pre {
+  overflow-x: auto;
+  background: var(--navy);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 4px;
+  padding: 1rem;
+}
+
+.content-prose pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.content-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.content-prose th,
+.content-prose td {
+  border: 1px solid rgba(201,168,76,0.12);
+  padding: 0.7rem 0.85rem;
+  text-align: left;
+}
+
+.content-prose th {
+  color: var(--cream);
+  background: rgba(11,13,26,0.45);
+}
+
+.content-prose img {
+  border-radius: var(--radius);
+  border: 1px solid rgba(201,168,76,0.15);
+}
+
+.highlight {
+  background: var(--navy);
+}
+
+.newsletter-note {
+  font-size: 0.83rem;
+  color: var(--dim);
+  margin-top: 1rem;
+}
+
+.quiz-shell {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.quiz-intro {
+  margin: 0;
+}
+
+.quiz-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.quiz-card {
+  background: var(--navy-2);
+  border: 1px solid rgba(201,168,76,0.14);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: border-color var(--trans), background var(--trans);
+}
+
+.quiz-card.is-correct {
+  border-color: rgba(201,168,76,0.55);
+}
+
+.quiz-card.is-incorrect {
+  border-color: rgba(201,76,76,0.55);
+}
+
+.quiz-question {
+  font-family: var(--ff-display);
+  font-size: 1.24rem;
+  line-height: 1.25;
+  color: var(--cream);
+  margin-bottom: 1rem;
+}
+
+.quiz-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid rgba(201,168,76,0.14);
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--cream-2);
+  transition: background var(--trans), border-color var(--trans);
+}
+
+.quiz-option + .quiz-option {
+  margin-top: 0.75rem;
+}
+
+.quiz-option:hover {
+  background: var(--navy-3);
+  border-color: rgba(201,168,76,0.34);
+}
+
+.quiz-option input {
+  margin-top: 0.26rem;
+  accent-color: var(--gold);
+}
+
+.quiz-actions {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.quiz-result {
+  background: var(--navy-2);
+  border: 1px solid rgba(201,168,76,0.14);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.3rem;
+  min-height: 72px;
+}
+
+.quiz-result:empty {
+  display: none;
+}
+
+.quiz-feedback {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.quiz-feedback-item {
+  color: var(--dim);
+  font-size: 0.92rem;
+}
+
+.empty-state {
+  background: var(--navy-2);
+  border: 1px solid rgba(201,168,76,0.14);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  color: var(--dim);
+}
+
+@media (max-width: 900px) {
+  .archive-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .article-hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .article-visual {
+    order: -1;
+  }
+}
+
+@media (max-width: 680px) {
+  .page-hero,
+  .article-hero {
+    padding-top: calc(var(--nav-h) + 3.25rem);
+  }
+
+  .content-prose {
+    padding: 1.25rem;
+  }
+
+  .archive-card-title {
+    font-size: 1.18rem;
+  }
+
+  .quiz-card {
+    padding: 1.2rem;
+  }
+}

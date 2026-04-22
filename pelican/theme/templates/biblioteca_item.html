@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} — {{ SITENAME }}{% endblock title %}
+{% block description %}
+{% if page.summary %}{{ page.summary|striptags }}{% else %}{{ SITE_DESCRIPTION }}{% endif %}
+{% endblock description %}
+
+{% block content %}
+{% if page.source_url and page.source_url.startswith("http") %}
+  {% set source_href = page.source_url %}
+  {% set source_external = true %}
+{% elif page.source_url %}
+  {% set source_href = SITEURL ~ "/" ~ page.source_url %}
+  {% set source_external = false %}
+{% else %}
+  {% set source_href = "" %}
+  {% set source_external = false %}
+{% endif %}
+
+{% set related_items = namespace(list=[]) %}
+{% for candidate in pages | selectattr("library_item", "defined") | sort(attribute="date", reverse=true) %}
+  {% if candidate.slug != page.slug and candidate.topic == page.topic %}
+    {% set related_items.list = related_items.list + [candidate] %}
+  {% endif %}
+{% endfor %}
+
+{% set related_articles = namespace(list=[]) %}
+{% for article in articles %}
+  {% if article.category == page.topic %}
+    {% set related_articles.list = related_articles.list + [article] %}
+  {% endif %}
+{% endfor %}
+
+<section class="page-hero">
+  <div class="section-wrap page-hero-inner fade-up">
+    <p class="page-kicker">{% if page.kicker %}{{ page.kicker }}{% else %}Biblioteca{% endif %}</p>
+    <h1 class="page-title">{{ page.title }}</h1>
+    {% if page.subtitle %}
+    <p class="page-subtitle">{{ page.subtitle }}</p>
+    {% elif page.summary %}
+    <p class="page-subtitle">{{ page.summary|striptags }}</p>
+    {% endif %}
+    <div class="exercise-badges page-badges">
+      {% if page.topic %}<span class="exercise-badge">{{ page.topic }}</span>{% endif %}
+      {% if page.material_type %}<span class="exercise-badge">{{ page.material_type }}</span>{% endif %}
+      {% if page.level %}<span class="exercise-badge">{{ page.level }}</span>{% endif %}
+      {% if page.language %}<span class="exercise-badge">{{ page.language }}</span>{% endif %}
+    </div>
+    <div class="library-page-actions">
+      <a href="{{ SITEURL }}/biblioteca.html" class="btn-ghost">Voltar à biblioteca</a>
+      {% if source_href %}
+      <a href="{{ source_href }}" class="btn-primary"{% if source_external %} target="_blank" rel="noopener"{% endif %}>
+        {% if source_external %}Abrir fonte{% else %}Abrir material{% endif %}
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="page-section">
+  <div class="section-wrap library-shell">
+    <div class="library-meta-grid fade-up">
+      {% if page.material_type %}
+      <div class="library-meta-card">
+        <span class="library-meta-label">Tipo</span>
+        <strong class="library-meta-value">{{ page.material_type }}</strong>
+      </div>
+      {% endif %}
+      {% if page.topic %}
+      <div class="library-meta-card">
+        <span class="library-meta-label">Tema</span>
+        <strong class="library-meta-value">{{ page.topic }}</strong>
+      </div>
+      {% endif %}
+      {% if page.level %}
+      <div class="library-meta-card">
+        <span class="library-meta-label">Nível</span>
+        <strong class="library-meta-value">{{ page.level }}</strong>
+      </div>
+      {% endif %}
+      {% if page.authors %}
+      <div class="library-meta-card">
+        <span class="library-meta-label">Autoria</span>
+        <strong class="library-meta-value">{{ page.authors }}</strong>
+      </div>
+      {% endif %}
+      {% if page.language %}
+      <div class="library-meta-card">
+        <span class="library-meta-label">Idioma</span>
+        <strong class="library-meta-value">{{ page.language }}</strong>
+      </div>
+      {% endif %}
+      {% if page.locale_date %}
+      <div class="library-meta-card">
+        <span class="library-meta-label">Registro</span>
+        <strong class="library-meta-value">{{ page.locale_date }}</strong>
+      </div>
+      {% endif %}
+    </div>
+
+    {% if page.library_tags %}
+    <div class="library-keywords fade-up">
+      {% for keyword in page.library_tags.split('|') %}
+      <span class="library-keyword">{{ keyword }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="content-shell">
+      <div class="content-prose fade-up">
+        {{ page.content }}
+      </div>
+    </div>
+
+    {% if related_items.list %}
+    <div class="section-header fade-up">
+      <div>
+        <p class="section-label">Relacionados</p>
+        <h2 class="section-title">Outros materiais do mesmo tema</h2>
+      </div>
+    </div>
+    <div class="library-grid">
+      {% for item in related_items.list[:3] %}
+      <article class="library-card fade-up">
+        <div class="library-card-top">
+          <p class="post-category">{{ item.material_type|default("Material") }}</p>
+          <h3 class="library-card-title">{{ item.title }}</h3>
+          <p class="library-card-text">{{ item.summary|striptags }}</p>
+        </div>
+        <div class="exercise-badges">
+          {% if item.topic %}<span class="exercise-badge">{{ item.topic }}</span>{% endif %}
+          {% if item.level %}<span class="exercise-badge">{{ item.level }}</span>{% endif %}
+        </div>
+        <div class="library-card-actions">
+          <a href="{{ SITEURL }}/{{ item.url }}" class="btn-ghost">Ver ficha</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if related_articles.list %}
+    <div class="section-header fade-up">
+      <div>
+        <p class="section-label">Portal</p>
+        <h2 class="section-title">Artigos relacionados</h2>
+      </div>
+    </div>
+    <div class="library-grid">
+      {% for article in related_articles.list[:3] %}
+      <article class="library-card fade-up">
+        <div class="library-card-top">
+          <p class="post-category">artigo</p>
+          <h3 class="library-card-title">{{ article.title }}</h3>
+          <p class="library-card-text">{{ article.summary|striptags }}</p>
+        </div>
+        <div class="exercise-badges">
+          <span class="exercise-badge">{{ article.category }}</span>
+        </div>
+        <div class="library-card-actions">
+          <a href="{{ SITEURL }}/{{ article.url }}" class="btn-ghost">Abrir artigo</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock content %}

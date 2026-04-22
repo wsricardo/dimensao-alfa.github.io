@@ -1,0 +1,248 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} — {{ SITENAME }}{% endblock title %}
+{% block description %}
+{% if page.summary %}{{ page.summary|striptags }}{% else %}{{ SITE_DESCRIPTION }}{% endif %}
+{% endblock description %}
+
+{% block content %}
+{% set library_items = pages | selectattr("library_item", "defined") | sort(attribute="date", reverse=true) | list %}
+{% set featured_item = namespace(item=None) %}
+{% set filters = namespace(topics=[], material_types=[], levels=[], languages=[]) %}
+
+{% for candidate in library_items %}
+  {% if not featured_item.item and candidate.featured %}
+    {% set featured_item.item = candidate %}
+  {% endif %}
+  {% if candidate.topic and candidate.topic not in filters.topics %}
+    {% set filters.topics = filters.topics + [candidate.topic] %}
+  {% endif %}
+  {% if candidate.material_type and candidate.material_type not in filters.material_types %}
+    {% set filters.material_types = filters.material_types + [candidate.material_type] %}
+  {% endif %}
+  {% if candidate.level and candidate.level not in filters.levels %}
+    {% set filters.levels = filters.levels + [candidate.level] %}
+  {% endif %}
+  {% if candidate.language and candidate.language not in filters.languages %}
+    {% set filters.languages = filters.languages + [candidate.language] %}
+  {% endif %}
+{% endfor %}
+
+{% if not featured_item.item and library_items %}
+  {% set featured_item.item = library_items[0] %}
+{% endif %}
+
+<section class="page-hero">
+  <div class="section-wrap page-hero-inner fade-up">
+    <p class="page-kicker">{% if page.kicker %}{{ page.kicker }}{% else %}Acervo editorial{% endif %}</p>
+    <h1 class="page-title">{{ page.title }}</h1>
+    {% if page.subtitle %}
+    <p class="page-subtitle">{{ page.subtitle }}</p>
+    {% elif page.summary %}
+    <p class="page-subtitle">{{ page.summary|striptags }}</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="page-section">
+  <div class="section-wrap library-shell">
+    <div class="content-prose fade-up">
+      {{ page.content }}
+    </div>
+
+    <div class="library-stats fade-up">
+      <div class="library-stat">
+        <span class="library-stat-label">Materiais</span>
+        <strong class="library-stat-value">{{ library_items|count }}</strong>
+      </div>
+      <div class="library-stat">
+        <span class="library-stat-label">Temas</span>
+        <strong class="library-stat-value">{{ filters.topics|count }}</strong>
+      </div>
+      <div class="library-stat">
+        <span class="library-stat-label">Formatos</span>
+        <strong class="library-stat-value">{{ filters.material_types|count }}</strong>
+      </div>
+      <div class="library-stat">
+        <span class="library-stat-label">Idiomas</span>
+        <strong class="library-stat-value">{{ filters.languages|count }}</strong>
+      </div>
+    </div>
+
+    {% if featured_item.item %}
+    {% if featured_item.item.source_url and featured_item.item.source_url.startswith("http") %}
+      {% set featured_source = featured_item.item.source_url %}
+      {% set featured_external = true %}
+    {% elif featured_item.item.source_url %}
+      {% set featured_source = SITEURL ~ "/" ~ featured_item.item.source_url %}
+      {% set featured_external = false %}
+    {% else %}
+      {% set featured_source = "" %}
+      {% set featured_external = false %}
+    {% endif %}
+    <article class="library-feature fade-up">
+      <div class="library-feature-body">
+        <p class="post-category">Material em destaque</p>
+        <h2 class="library-feature-title">{{ featured_item.item.title }}</h2>
+        <p class="library-feature-text">{{ featured_item.item.summary|striptags }}</p>
+        <div class="exercise-badges">
+          {% if featured_item.item.topic %}<span class="exercise-badge">{{ featured_item.item.topic }}</span>{% endif %}
+          {% if featured_item.item.material_type %}<span class="exercise-badge">{{ featured_item.item.material_type }}</span>{% endif %}
+          {% if featured_item.item.level %}<span class="exercise-badge">{{ featured_item.item.level }}</span>{% endif %}
+          {% if featured_item.item.language %}<span class="exercise-badge">{{ featured_item.item.language }}</span>{% endif %}
+        </div>
+      </div>
+      <div class="library-feature-actions">
+        <a href="{{ SITEURL }}/{{ featured_item.item.url }}" class="btn-ghost">Ver ficha</a>
+        {% if featured_source %}
+        <a href="{{ featured_source }}" class="btn-primary"{% if featured_external %} target="_blank" rel="noopener"{% endif %}>
+          {% if featured_external %}Abrir fonte{% else %}Abrir material{% endif %}
+        </a>
+        {% endif %}
+      </div>
+    </article>
+    {% endif %}
+
+    <div class="section-header fade-up">
+      <div>
+        <p class="section-label">Busca</p>
+        <h2 class="section-title">Encontre materiais específicos</h2>
+      </div>
+    </div>
+
+    <section class="library-controls fade-up" data-library-root>
+      <div class="library-toolbar">
+        <label class="library-search">
+          <span class="library-control-label">Pesquisar</span>
+          <input type="search" placeholder="Título, tema, autor, palavra-chave..." data-library-query>
+        </label>
+        <label class="library-filter">
+          <span class="library-control-label">Tema</span>
+          <select data-library-topic>
+            <option value="">Todos</option>
+            {% for topic in filters.topics|sort %}
+            <option value="{{ topic }}">{{ topic }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        <label class="library-filter">
+          <span class="library-control-label">Tipo</span>
+          <select data-library-type>
+            <option value="">Todos</option>
+            {% for material_type in filters.material_types|sort %}
+            <option value="{{ material_type }}">{{ material_type }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        <label class="library-filter">
+          <span class="library-control-label">Nível</span>
+          <select data-library-level>
+            <option value="">Todos</option>
+            {% for level in filters.levels|sort %}
+            <option value="{{ level }}">{{ level }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        <label class="library-filter">
+          <span class="library-control-label">Idioma</span>
+          <select data-library-language>
+            <option value="">Todos</option>
+            {% for language in filters.languages|sort %}
+            <option value="{{ language }}">{{ language }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        <button type="button" class="btn-ghost library-clear" data-library-clear>Limpar filtros</button>
+      </div>
+
+      <div class="library-results-head">
+        <p class="library-results-copy" data-library-count>
+          {{ library_items|count }} materiais disponíveis no acervo.
+        </p>
+      </div>
+
+      <div class="library-grid" data-library-grid>
+        {% for item in library_items %}
+        {% if item.source_url and item.source_url.startswith("http") %}
+          {% set source_href = item.source_url %}
+          {% set source_external = true %}
+        {% elif item.source_url %}
+          {% set source_href = SITEURL ~ "/" ~ item.source_url %}
+          {% set source_external = false %}
+        {% else %}
+          {% set source_href = "" %}
+          {% set source_external = false %}
+        {% endif %}
+        {% set search_blob = (
+          item.title ~ " " ~
+          item.summary|striptags ~ " " ~
+          item.topic|default("", true) ~ " " ~
+          item.material_type|default("", true) ~ " " ~
+          item.level|default("", true) ~ " " ~
+          item.authors|default("", true) ~ " " ~
+          item.language|default("", true) ~ " " ~
+          item.library_tags|default("", true)
+        ) %}
+        <article
+          class="library-card fade-up"
+          data-library-card
+          data-order="{{ loop.index0 }}"
+          data-title="{{ item.title|e }}"
+          data-summary="{{ item.summary|striptags|e }}"
+          data-topic="{{ item.topic|default('', true)|e }}"
+          data-type="{{ item.material_type|default('', true)|e }}"
+          data-level="{{ item.level|default('', true)|e }}"
+          data-language="{{ item.language|default('', true)|e }}"
+          data-authors="{{ item.authors|default('', true)|e }}"
+          data-tags="{{ item.library_tags|default('', true)|replace('|', ' ')|e }}"
+          data-search="{{ search_blob|e }}"
+          data-featured="{% if item.featured %}1{% else %}0{% endif %}">
+          <div class="library-card-top">
+            <p class="post-category">{{ item.material_type|default("Material") }}</p>
+            <h3 class="library-card-title">{{ item.title }}</h3>
+            <p class="library-card-text">{{ item.summary|striptags }}</p>
+          </div>
+
+          <div class="exercise-badges">
+            {% if item.topic %}<span class="exercise-badge">{{ item.topic }}</span>{% endif %}
+            {% if item.level %}<span class="exercise-badge">{{ item.level }}</span>{% endif %}
+            {% if item.language %}<span class="exercise-badge">{{ item.language }}</span>{% endif %}
+          </div>
+
+          <div class="post-meta">
+            {% if item.authors %}<span>{{ item.authors }}</span>{% endif %}
+            {% if item.authors and item.locale_date %}<span class="post-meta-dot"></span>{% endif %}
+            {% if item.locale_date %}<span>{{ item.locale_date }}</span>{% endif %}
+          </div>
+
+          {% if item.library_tags %}
+          <div class="library-keywords">
+            {% for keyword in item.library_tags.split('|') %}
+            <span class="library-keyword">{{ keyword }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <div class="library-card-actions">
+            <a href="{{ SITEURL }}/{{ item.url }}" class="btn-ghost">Ver ficha</a>
+            {% if source_href %}
+            <a href="{{ source_href }}" class="btn-primary"{% if source_external %} target="_blank" rel="noopener"{% endif %}>
+              {% if source_external %}Abrir fonte{% else %}Abrir material{% endif %}
+            </a>
+            {% endif %}
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+
+      <div class="empty-state" data-library-empty hidden>
+        Nenhum material corresponde à combinação atual de busca e filtros.
+      </div>
+    </section>
+  </div>
+</section>
+{% endblock content %}
+
+{% block scripts %}
+<script src="{{ SITEURL }}/theme/js/biblioteca.js" defer></script>
+{% endblock scripts %}

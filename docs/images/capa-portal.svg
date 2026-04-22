@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Capa visual do portal Dimensão Alfa</title>
+  <desc id="desc">Fundo azul profundo com grade dourada suave e símbolos matemáticos.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#0b0d1a"/>
+      <stop offset="100%" stop-color="#181d38"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <g stroke="rgba(201,168,76,0.16)" stroke-width="1">
+    <path d="M0 120H1200M0 240H1200M0 360H1200M0 480H1200M0 600H1200"/>
+    <path d="M160 0V720M320 0V720M480 0V720M640 0V720M800 0V720M960 0V720M1120 0V720"/>
+  </g>
+  <circle cx="850" cy="250" r="180" fill="rgba(201,168,76,0.06)"/>
+  <g fill="#c9a84c" opacity="0.92">
+    <text x="140" y="240" font-size="120" font-family="'Playfair Display', serif">∫</text>
+    <text x="930" y="530" font-size="140" font-family="'Playfair Display', serif">π</text>
+    <text x="780" y="210" font-size="84" font-family="'Playfair Display', serif">∑</text>
+  </g>
+  <g fill="#f2ede4">
+    <text x="140" y="460" font-size="48" font-family="'Playfair Display', serif">Dimensão Alfa</text>
+    <text x="140" y="520" font-size="24" font-family="'JetBrains Mono', monospace" letter-spacing="6">PORTAL DE MATEMÁTICA</text>
+  </g>
+</svg>

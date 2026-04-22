@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Capa de cálculo</title>
+  <desc id="desc">Plano escuro com curvas douradas e notação integral.</desc>
+  <rect width="1200" height="720" fill="#0f1325"/>
+  <g fill="none" stroke="#c9a84c" stroke-width="3" opacity="0.55">
+    <path d="M40 520C180 460 220 250 360 250s180 210 320 210 180-160 320-160 180 120 320 120"/>
+    <path d="M40 580C180 580 220 360 360 360s180 120 320 120 180-110 320-110 180 80 320 80"/>
+  </g>
+  <g fill="#c9a84c" opacity="0.9">
+    <text x="120" y="230" font-size="150" font-family="'Playfair Display', serif">∫</text>
+    <text x="965" y="180" font-size="92" font-family="'Playfair Display', serif">dx</text>
+  </g>
+  <g fill="#f2ede4">
+    <text x="120" y="470" font-size="46" font-family="'Playfair Display', serif">Cálculo</text>
+    <text x="120" y="528" font-size="24" font-family="'JetBrains Mono', monospace" letter-spacing="6">LIMITE · DERIVADA · INTEGRAL</text>
+  </g>
+</svg>
